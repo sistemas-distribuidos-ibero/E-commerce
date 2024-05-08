@@ -1,8 +1,8 @@
-auth/*
-carrito/*
-email/*
-gateway/*
-products/*
-users/*
-orders/*
-web/*
+auth/
+carrito/
+email/
+gateway/
+products/
+users/
+orders/
+web/
