@@ -11,7 +11,7 @@ services:
     env_file:
       - ./auth/.env
     depends_on:
-      - sql
+      - postgres
   
   users:
     build: ./users
@@ -23,7 +23,7 @@ services:
     env_file:
       - ./users/.env
     depends_on:
-      - sql
+      - postgres
 
   orders:
     build: ./orders
@@ -35,7 +35,7 @@ services:
     env_file:
       - ./orders/.env
     depends_on:
-      - sql
+      - postgres
   
   products:
     build: ./products
@@ -70,6 +70,26 @@ services:
     depends_on:
       - redis
 
+  gateway:
+    build: ./gateway
+    volumes:
+      - ./gateway:/app
+    working_dir: /app
+    ports:
+      - "8000:5000"
+    env_file:
+      - ./gateway/.env
+    depends_on:
+      - auth
+      - users
+      - orders    
+      - products
+      - email 
+      - carrito
+      - redis
+      - mongo
+      - postgers
+
   web:
     build: ./web
     volumes:
@@ -82,16 +102,12 @@ services:
   redis:
     build: ./carrito/redis
     volumes:
-      - redis:/data
+      - redis_data:/data
     ports:
       - "6379:6379"
 
-  sql:
-    image: postgres:16.2-alpine
-    environment:
-      - POSTGRES_USER=root
-      - POSTGRES_PASSWORD=12345
-      - POSTGRES_DB=users_db
+  postgres:
+    build: ./postgres
     volumes:
       - postgres_data:/var/lib/postgresql/data
   
@@ -109,5 +125,5 @@ volumes:
   mongo_data:
   web_node_modules:
   email_node_modules:
-  redis:
+  redis_data:
     driver: local
