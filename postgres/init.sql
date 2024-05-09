@@ -1,0 +1,33 @@
+CREATE TABLE roles (
+    id SERIAL PRIMARY KEY,
+    nombre VARCHAR(50),
+);
+
+CREATE TABLE users (
+    id SERIAL PRIMARY KEY,
+    id_role INTEGER,
+    name VARCHAR(50),
+    lastname VARCHAR(50),
+    email VARCHAR(100),
+    password VARCHAR(128),
+    created_at TIMESTAMP(),
+    updated_at TIMESTAMP(),
+    is_banned BOOLEAN,
+    
+    FOREIGN KEY (id_role) REFERENCES roles(id)
+);
+
+CREATE TABLE orders (
+    id SERIAL PRIMARY KEY,
+    id_user VARCHAR(50),
+    price DOUBLE,
+    created_at TIMESTAMP(),
+);
+
+CREATE TABLE usuarios (
+    id_order INTEGER,
+    id_product VARCHAR(50),
+    quantity INTEGER,
+
+    FOREIGN KEY (id_order) REFERENCES orders(id)
+);
