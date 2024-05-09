@@ -1,6 +1,6 @@
 CREATE TABLE roles (
     id SERIAL PRIMARY KEY,
-    nombre VARCHAR(50),
+    nombre VARCHAR(50)
 );
 
 CREATE TABLE users (
@@ -10,8 +10,8 @@ CREATE TABLE users (
     lastname VARCHAR(50),
     email VARCHAR(100),
     password VARCHAR(128),
-    created_at TIMESTAMP(),
-    updated_at TIMESTAMP(),
+    created_at TIMESTAMP,
+    updated_at TIMESTAMP,
     is_banned BOOLEAN,
     
     FOREIGN KEY (id_role) REFERENCES roles(id)
@@ -20,11 +20,11 @@ CREATE TABLE users (
 CREATE TABLE orders (
     id SERIAL PRIMARY KEY,
     id_user VARCHAR(50),
-    price DOUBLE,
-    created_at TIMESTAMP(),
+    price FLOAT,
+    created_at TIMESTAMP
 );
 
-CREATE TABLE usuarios (
+CREATE TABLE orders_products (
     id_order INTEGER,
     id_product VARCHAR(50),
     quantity INTEGER,
