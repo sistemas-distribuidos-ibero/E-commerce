@@ -1,6 +1,6 @@
 CREATE TABLE roles (
     id SERIAL PRIMARY KEY,
-    nombre VARCHAR(50)
+    name VARCHAR(50)
 );
 
 CREATE TABLE users (
@@ -31,3 +31,7 @@ CREATE TABLE orders_products (
 
     FOREIGN KEY (id_order) REFERENCES orders(id)
 );
+
+INSERT INTO roles (name) VALUES
+('user'),
+('admin');
