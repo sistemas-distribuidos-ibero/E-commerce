@@ -80,7 +80,7 @@ services:
     ports:
       - "8000:6789"
     env_file:
-      - ./gateway/.env
+      - ./gateway/.env.dev
     depends_on:
       - auth
       - users
