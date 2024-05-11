@@ -9,7 +9,7 @@ services:
     ports:
       - "5001:5000"
     env_file:
-      - ./auth/.env
+      - ./auth/.env.dev
     depends_on:
       - postgres
   
@@ -21,7 +21,7 @@ services:
     ports:
       - "5002:5000"
     env_file:
-      - ./users/.env
+      - ./users/.env.dev
     depends_on:
       - postgres
 
@@ -33,7 +33,7 @@ services:
     ports:
       - "5003:5000"
     env_file:
-      - ./orders/.env
+      - ./orders/.env.dev
     depends_on:
       - postgres
   
@@ -45,7 +45,7 @@ services:
     ports:
       - "5004:5000"
     env_file:
-      - ./products/.env
+      - ./products/.env.dev
     depends_on:
       - mongo
   
@@ -58,7 +58,7 @@ services:
     ports:
       - "5005:5000"
     env_file:
-      - ./email/.env
+      - ./email/.env.dev
 
   carrito:
     build: ./carrito/flaskapp
@@ -69,6 +69,8 @@ services:
       - "5006:5000"
     depends_on:
       - redis
+    env_file:
+      - ./carrito/.env.dev
 
   gateway:
     build: ./gateway
